@@ -1,0 +1,11 @@
+D:\ProjectsGitHub\MysticMask\bin\Debug\MysticMask.exe.config
+D:\ProjectsGitHub\MysticMask\bin\Debug\MysticMask.exe
+D:\ProjectsGitHub\MysticMask\bin\Debug\MysticMask.pdb
+D:\ProjectsGitHub\MysticMask\obj\Debug\MysticMask.csproj.AssemblyReference.cache
+D:\ProjectsGitHub\MysticMask\obj\Debug\MysticMask.csproj.SuggestedBindingRedirects.cache
+D:\ProjectsGitHub\MysticMask\obj\Debug\MysticMask.Properties.Resources.resources
+D:\ProjectsGitHub\MysticMask\obj\Debug\MysticMask.csproj.GenerateResource.cache
+D:\ProjectsGitHub\MysticMask\obj\Debug\MysticMask.csproj.CoreCompileInputs.cache
+D:\ProjectsGitHub\MysticMask\obj\Debug\MysticMask.exe
+D:\ProjectsGitHub\MysticMask\obj\Debug\MysticMask.pdb
+D:\ProjectsGitHub\MysticMask\obj\Debug\MysticMask.MainForm.resources
