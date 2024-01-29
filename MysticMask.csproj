@@ -83,5 +83,14 @@
   <ItemGroup>
     <None Include="Resources\mystic mask face.png" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="moose.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\no_volume.png" />
+    <None Include="Resources\no_volume-removebg-preview.png" />
+    <None Include="Resources\volume.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
