@@ -4,7 +4,7 @@
 Mystic Mask is a versatile and secure text encryption tool designed to protect your sensitive information. With Mystic Mask, you can encrypt text files, embed secret messages in innocuous documents, and ensure your data's safety with robust encryption algorithms.
 
 <p align="center">
-  <img src="/Resources/main.png" alt="Mystic Mask Main Image">
+  <img src="/Mystic Mask/Resources/main.png" alt="Mystic Mask Main Image">
 </p>
 
 ## Features
@@ -15,10 +15,11 @@ Mystic Mask is a versatile and secure text encryption tool designed to protect y
 - **Light Background Music:** Enjoy a pleasant, unobtrusive musical accompaniment while using the application, with the option to adjust or mute the volume.
 
 ## Data Encryption
-![Data Encryption GroupBox](/Resources/groupBox1.png)
+![Data Encryption GroupBox](/Mystic Mask/Resources/groupBox1.png)
+
 
 ## Data Recovery
-![Data Recovery GroupBox](/Resources/groupBox2.png)
+![Data Recovery GroupBox](/Mystic Mask/Resources/groupBox2.png)
 
 ## Getting Started
 1. [Instructions for installation]
