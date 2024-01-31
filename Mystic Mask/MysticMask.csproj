@@ -139,6 +139,8 @@
     <None Include="Resources\greyGhost1.png" />
     <None Include="Resources\blue.ico" />
     <None Include="Resources\green.ico" />
+    <Content Include="Resources\groupBox1.png" />
+    <Content Include="Resources\groupBox2.png" />
     <Content Include="Resources\moose.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

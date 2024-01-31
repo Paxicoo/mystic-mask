@@ -15,11 +15,15 @@ Mystic Mask is a versatile and secure text encryption tool designed to protect y
 - **Light Background Music:** Enjoy a pleasant, unobtrusive musical accompaniment while using the application, with the option to adjust or mute the volume.
 
 ## Data Encryption
-![Data Encryption GroupBox](/Mystic Mask/Resources/groupBox1.png)
+<img src="/Mystic Mask/Resources/groupBox1.png" alt="Mystic Data Encryption Image">
+**Create Rosa File:** This feature allows users to securely encrypt their sensitive data into a `.Rosa` file. It includes an interactive process where users can select a name and a color for their Rosa. The chosen color is embedded as metadata within the encrypted file, setting the stage for future features that will utilize this information.
 
+**Secret Embedding:** An advanced functionality that enables users to conceal encrypted text within seemingly innocuous files, such as images or documents. This technique, known as steganography, ensures that sensitive information remains hidden in plain sight, adding an extra layer of security and discretion.
+
+Both features are designed with user experience in mind, ensuring ease of use while providing robust security measures to protect your data.
 
 ## Data Recovery
-![Data Recovery GroupBox](/Mystic Mask/Resources/groupBox2.png)
+<img src="/Mystic Mask/Resources/groupBox2.png" alt="Mystic Data Recovery Image">
 
 ## Getting Started
 1. [Instructions for installation]
