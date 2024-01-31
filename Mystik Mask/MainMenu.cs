@@ -80,6 +80,20 @@ namespace MysticMask
             }
         }
 
+        private byte[] EncryptWithMetadata(byte[] data, string passphrase, string colorMetadata)
+        {
+            // Convert the color metadata to byte array
+            byte[] metadataBytes = Encoding.UTF8.GetBytes(colorMetadata);
+            byte[] combinedData = new byte[metadataBytes.Length + data.Length];
+
+            // Copy metadata and file data to combinedData
+            Buffer.BlockCopy(metadataBytes, 0, combinedData, 0, metadataBytes.Length);
+            Buffer.BlockCopy(data, 0, combinedData, metadataBytes.Length, data.Length);
+
+            // Encrypt combinedData instead of just data
+            return Encrypt(combinedData, passphrase);
+        }
+
         private void GenerateEncryptionKeyIV(string passphrase, out byte[] key, out byte[] iv)
         {
             // Use a key derivation function to generate a key and IV from the passphrase
@@ -108,7 +122,7 @@ namespace MysticMask
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
 
-                string welcomeMessage = "Select the target file to create a new Rosa\n\n He will keep your secrets. 🤫";
+                string welcomeMessage = "Select the target file to create a new Rosa";
                 MessageBox.Show(welcomeMessage, "Initiate MysticMask Protocol 🚀", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -125,18 +139,53 @@ namespace MysticMask
 
                     byte[] encryptedBytes = Encrypt(fileContent, passphrase);
 
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = "MysticMask Encrypted Files (*.Rosa)|*.Rosa";
-                    saveFileDialog.FilterIndex = 1;
-                    saveFileDialog.RestoreDirectory = true;
+                    // Display the GhostColorForm as a modal dialog
+                    GhostColorForm ghostColorForm = new GhostColorForm();
+                    var dialogResult = ghostColorForm.ShowDialog();
 
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    // Proceed only if the dialog was closed with a positive result
+                    if (dialogResult == DialogResult.OK)
                     {
-                        string saveFilePath = saveFileDialog.FileName;
-                        File.WriteAllBytes(saveFilePath, encryptedBytes);
-                        MessageBox.Show("Success! Your file has been transformed into a 'Rosa'.\n\n" +
-                                        "Now known as '" + Path.GetFileNameWithoutExtension(saveFilePath) + "', it will securely guard your secrets.\n\n" +
-                                        "Keep it safe and secure. 🔐", "Encryption Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string selectedColor = ghostColorForm.SelectedColorName;
+                        string ghostName = ghostColorForm.GhostName;
+
+                        // Combine color metadata with file content
+                        string colorMetadata = "color:" + selectedColor + ";";
+                        byte[] encryptedBytesWithMetadata = EncryptWithMetadata(fileContent, passphrase, colorMetadata);
+
+                        // Check if a valid ghost name was provided
+                        if (string.IsNullOrWhiteSpace(ghostName))
+                        {
+                            MessageBox.Show("No name was provided for the Rosa. Please try again.", "Name Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        SaveFileDialog saveFileDialog = new SaveFileDialog();
+                        saveFileDialog.FileName = ghostName + ".Rosa"; // Set default file name
+                        saveFileDialog.Filter = "MysticMask Encrypted Files (*.Rosa)|*.Rosa";
+                        saveFileDialog.FilterIndex = 1;
+                        saveFileDialog.RestoreDirectory = true;
+
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            string saveFilePath = saveFileDialog.FileName;
+
+                            try
+                            {
+                                File.WriteAllBytes(saveFilePath, encryptedBytes);
+                                MessageBox.Show("Success! Your file has been transformed into a 'Rosa'.\n\n" +
+                                                "Now known as '" + Path.GetFileNameWithoutExtension(saveFilePath) + "', it will securely guard your secrets.\n\n" +
+                                                "Keep it safe and secure. 🔐", "Encryption Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Failed to save the Rosa file: " + ex.Message, "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Rosa creation was cancelled.", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
