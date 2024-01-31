@@ -1,19 +1,14 @@
 ﻿using System; 
-using System.Collections.Generic; 
-using System.ComponentModel; 
-using System.Data; 
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks; 
-using System.Media; // for SoundPlayer
 using System.Windows.Forms;
+using System.IO;
+using NAudio.Wave;
 
 namespace MysticMask
 {
     public partial class MainForm : Form
     {
-        private SoundPlayer soundPlayer; // for playing sound
+        private WaveOutEvent outputDevice;
+        private AudioFileReader audioFile;
         private bool isMusicPlaying = true; // for checking if music is playing
 
 
@@ -25,8 +20,14 @@ namespace MysticMask
 
         private void InitializeMusic()
         {
-            // Load the music file
-            soundPlayer = new SoundPlayer("moose.wav");
+            // Dispose previous instances if they exist
+            outputDevice?.Dispose();
+            audioFile?.Dispose();
+
+            // Initialize NAudio components
+            outputDevice = new WaveOutEvent();
+            audioFile = new AudioFileReader(@"Resources/moose.wav") { Volume = 0.2F }; // 0.2F = 20% volume
+            outputDevice.Init(audioFile);
 
             // Play the music
             PlayMusic();
@@ -36,11 +37,11 @@ namespace MysticMask
         {
             if (isMusicPlaying)
             {
-                soundPlayer.PlayLooping();
+                outputDevice.Play();
             }
             else
             {
-                soundPlayer.Stop();
+                outputDevice.Stop();
             }
         }
 
@@ -62,10 +63,65 @@ namespace MysticMask
             }
         }
 
-        private void pictureBox8_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            // we need a filter that only accepts .txt files to then encrypt into .rosa files
+            openFileDialog.Filter = "Text Files (*.txt)|*.txt";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
 
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string selectedFilePath = openFileDialog.FileName;
+
+                    // Read the contents of the selected file
+                    byte[] textFile = File.ReadAllBytes(selectedFilePath);
+
+                    // Encrypt the file contents (need to replace this with the encryption logic)
+                    byte[] encryptedBytes = Encrypt(textFile);
+
+                    // Prompt the user to choose the location to save the encrypted file
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "MysticMask Encrypted Files (*.rosa)|*.rosa";
+                    saveFileDialog.FilterIndex = 1;
+                    saveFileDialog.RestoreDirectory = true;
+
+                    saveFileDialog.FileName = selectedFilePath;
+
+                   
+                    if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                    {
+                        string saveFilePath = saveFileDialog.FileName;
+
+                        
+
+                        // Save the encrypted data to the selected location
+                        //File.WriteAllBytes(saveFilePath, encryptedBytes);
+
+
+                        //MessageBox.Show("File encrypted and saved successfully!", "Encryption Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Encryption Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
-    }
+
+        // Replace this method with your encryption logic
+        private byte[] Encrypt(byte[] data)
+        {
+            // Encryption function yet to be implemented
+            return data;
+        }
+
+
+
+}
 }
 
