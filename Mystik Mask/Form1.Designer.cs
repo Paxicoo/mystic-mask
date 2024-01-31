@@ -164,7 +164,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 26);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Create Mask File";
+            this.button1.Text = "Create Rosa File";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -250,7 +250,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(142, 32);
             this.button5.TabIndex = 1;
-            this.button5.Text = "Dencrypt Mask File";
+            this.button5.Text = "Dencrypt Rosa File";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // MusicIcon
