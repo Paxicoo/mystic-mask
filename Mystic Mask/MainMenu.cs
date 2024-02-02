@@ -28,7 +28,7 @@ namespace MysticMask
 
             // Initialize NAudio components
             outputDevice = new WaveOutEvent();
-            audioFile = new AudioFileReader(@"Resources/moose.wav") { Volume = 0.2F }; // 0.2F = 20% volume
+            audioFile = new AudioFileReader(@"Resources/moose.wav") { Volume = 0.1F }; // 0.1F = 10% volume
             outputDevice.Init(audioFile);
 
             // Play the music
